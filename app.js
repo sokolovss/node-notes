@@ -20,12 +20,21 @@ if (command === "add") {
 } else if (command === "list") {
     notes.getAll();
 } else if (command === "remove") {
-    var noteRemoved = notes.remNote(argv.title, argv.body);
+    var noteRemoved = notes.remNote(argv.title);
     var message = noteRemoved ? 'Note was removed' : 'Note not found';
     console.log(message);
 
 } else if (command === "read") {
-    notes.getNote(argv.title, argv.body);
+    var note = notes.getNote(argv.title);
+    console.log(`---------------------------------------------- ${note}`);
+    if (note === undefined) {
+        console.log('Title not found');
+    } else {
+        console.log('Succesfully read: ');
+        console.log(`Title: ${note[0].title}`);
+        console.log(`Body: ${note[0].body}`);
+    };
+
 } else {
     console.log('Unrecognized command')
 };

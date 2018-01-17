@@ -42,7 +42,13 @@ var remNote = (title) => {
     return notes.length !== filteredNotes.length;
 };
 var getNote = (title) => {
-    console.log('Reading note', title)
+    var notes = fetchNotes();
+    var pickedNote = notes.filter((note) => note.title === title);
+    if (pickedNote.length > 0) {
+        return pickedNote;
+    } else {
+        return undefined;
+    }
 };
 
 module.exports = {
