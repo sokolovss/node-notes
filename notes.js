@@ -1,10 +1,11 @@
-console.log('node.js has been executed');
 // console.log(module);
 const fs = require('fs');
 
 var fetchNotes = () => {
+    debugger;
     try {
         var notesString = fs.readFileSync('notes-data.json');
+        debugger;
         return JSON.parse(notesString);
     } catch (e) {
         return [];
@@ -33,8 +34,9 @@ var addNote = (title, body) => {
 
 };
 var getAll = () => {
-    console.log('Getting all notes');
+    return fetchNotes();
 };
+
 var remNote = (title) => {
     var notes = fetchNotes();
     var filteredNotes = notes.filter((note) => note.title !== title);
@@ -50,10 +52,16 @@ var getNote = (title) => {
         return undefined;
     }
 };
+var logNote = (note) => {
+    console.log('-----');
+    console.log(`Title: ${note.title}`);
+    console.log(`Body: ${note.body}`);
+}
 
 module.exports = {
     addNote: addNote,
     getAll: getAll,
     remNote: remNote,
-    getNote: getNote
+    getNote: getNote,
+    logNote: logNote
 };
